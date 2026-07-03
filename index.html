@@ -129,7 +129,7 @@
   /* --- Hero --- */
   .hero{padding:clamp(50px,7vw,90px) 0 clamp(30px,4vw,50px);}
   .hero-grid{display:grid;grid-template-columns:1fr 0.95fr;gap:clamp(32px,5vw,64px);align-items:center;}
-  .hero-content{opacity:0;transform:translateY(30px);}
+  /* hero animated by motion */
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.06em;
@@ -661,22 +661,16 @@
   // --- Hero entrance ---
   const heroContent = document.querySelector('.hero-content');
   if (heroContent) {
-    const heroChildren = heroContent.children;
-    animate(
-      heroChildren,
-      { opacity: [0, 1], y: [30, 0] },
-      { duration: 0.6, ease: 'easeOut', delay: stagger(0.12) }
-    );
+    const heroChildren = [...heroContent.children];
+    animate(heroChildren, { opacity: 0, y: 30 }, { duration: 0 });
+    animate(heroChildren, { opacity: 1, y: 0 }, { duration: 0.6, ease: 'easeOut', delay: stagger(0.1) });
   }
 
   // --- Ticket entrance ---
   const ticket = document.getElementById('ticket');
   if (ticket) {
-    animate(
-      ticket,
-      { opacity: [0, 1], x: [40, 0], rotate: [3, 1.5] },
-      { duration: 0.7, delay: 0.5, ease: 'easeOut' }
-    );
+    animate(ticket, { opacity: 0, x: 40, rotate: 3 }, { duration: 0 });
+    animate(ticket, { opacity: 1, x: 0, rotate: 1.5 }, { duration: 0.7, delay: 0.4, ease: 'easeOut' });
   }
 
   // --- Section inView animations ---
